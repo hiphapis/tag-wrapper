@@ -16,10 +16,7 @@ export function activate(context: ExtensionContext) {
     let selectedText = editor.document.getText(selection);
     let wrapper = new TagWrapper(selectedText, selection);
 
-    if (wrapper.isAvaliableTag) {
-      editor.insertSnippet(wrapper.snippet); //insert snippet to replace the selection text
-    }
-
+    editor.insertSnippet(wrapper.snippet); //insert snippet to replace the selection text
   })
 
   context.subscriptions.push(disposable);
@@ -41,10 +38,6 @@ class TagWrapper {
 
   get snippet(): SnippetString {
     return this.generateSnippet();
-  }
-
-  get isAvaliableTag(): boolean {
-    return /\<(.|\n)*\>/g.test(this.selectedText);
   }
 
   private generateSnippet(): SnippetString {
